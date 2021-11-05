@@ -1,7 +1,6 @@
 <template>
     <div id="app">
       <div class="col-md-4">
-
         <div class="card" style="width: 18rem;">
           <qrcode-stream @decode="onDecode" @init="onInit" />
           <!-- <div class="loading-indicator" v-if="loading">
@@ -9,14 +8,18 @@
           </div> -->
             <div class="card-body">
               <p class="card-text">Please scan the qrcode event registration that we have sent via your email.</p>
-                <hr>
                   <div class="alert" :class="alert" role="alert">
                     {{ status }}
                   </div>
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
+      </div>
+      <div>
+        <button @click="printCurrentPosition"> Click for Geoposition
+        </button>
+        {{geoposition}}
+      </div>
+    </div>
 </template>
 
 <script>
@@ -32,14 +35,18 @@ export default {
       error: '',
       status: 'Webcam ready!',
       alert: 'alert-warning',
-      result: ''
+      result: '',
+      geoposition: {
+      
+      }
     }
   },
-  components: { QrcodeStream, Geolocation },
+  components: { QrcodeStream },
   methods: {
-    const printCurrentPosition = async () => {
+    async printCurrentPosition() {
       const coordinates = await Geolocation.getCurrentPosition();
       console.log('Current position:', coordinates);
+      this.geoposition = coordinates
     },
     async onDecode (result) {
       this.result = result
