@@ -17,7 +17,11 @@
       <div>
         <button @click="printCurrentPosition"> Click for Geoposition
         </button>
-        {{geoposition}}
+
+        altitude: {{geoposition.altitude}}
+        latitude: {{geoposition.latitude}}
+        longitude: {{geoposition.longitude}}
+
       </div>
     </div>
 </template>
@@ -37,7 +41,13 @@ export default {
       alert: 'alert-warning',
       result: '',
       geoposition: {
-      
+        accuracy: 13.505,
+        altitude: null,
+        altitudeAccuracy: null,
+        heading: null,
+        latitude: 51.2095542,
+        longitude: 3.2476194,
+        speed: null,     
       }
     }
   },
@@ -46,7 +56,7 @@ export default {
     async printCurrentPosition() {
       const coordinates = await Geolocation.getCurrentPosition();
       console.log('Current position:', coordinates);
-      this.geoposition = coordinates
+      this.geoposition.coordinates = coordinates.coords
     },
     async onDecode (result) {
       this.result = result
