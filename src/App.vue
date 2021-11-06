@@ -11,6 +11,7 @@
                   <div class="alert" :class="alert" role="alert">
                     {{ status }}
                   </div>
+                  <p class="decode-result">Last result: <b>{{ result }}</b></p>
             </div>
         </div>
       </div>
