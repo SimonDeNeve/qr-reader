@@ -22,6 +22,7 @@
         altitude: {{geoposition.altitude}}
         latitude: {{geoposition.latitude}}
         longitude: {{geoposition.longitude}}
+        accuracy: {{geoposition.accuracy}}
 
       </div>
     </div>
@@ -42,12 +43,12 @@ export default {
       alert: 'alert-warning',
       result: '',
       geoposition: {
-        accuracy: 13.505,
+        accuracy: 0,
         altitude: null,
         altitudeAccuracy: null,
         heading: null,
-        latitude: 51.2095542,
-        longitude: 3.2476194,
+        latitude: 0,
+        longitude: 0,
         speed: null,     
       }
     }
@@ -57,7 +58,7 @@ export default {
     async printCurrentPosition() {
       const coordinates = await Geolocation.getCurrentPosition();
       console.log('Current position:', coordinates);
-      this.geoposition.coordinates = coordinates.coords
+      this.geoposition = coordinates.coords
     },
     async onDecode (result) {
       this.result = result
@@ -96,7 +97,6 @@ export default {
   }
 }
 </script>
-
 
 <style>
 #app {
